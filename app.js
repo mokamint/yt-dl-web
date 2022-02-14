@@ -3,8 +3,6 @@ const app = express();
 
 const fs = require('fs');
 const ytdl = require('ytdl-core');
-const path = require('path');
-const  mime = require('mime');
 const port = 80;
 
 app.use('/static', express.static('files'));
