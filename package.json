@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "ytdl-core": "^4.10.1"
+  }
+}

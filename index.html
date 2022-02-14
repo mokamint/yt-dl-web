@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>유튜브 다운로더</title>
+    </head>
+
+    <body>
+        <h1>유튜브 오디오 / 영상 다운로더</h1>
+        <form method="get" name="info">
+            URL : <input type="text" name="url" autocomplete="off">
+            <input type="submit" value="오디오 다운로드" onclick="javascript: form.action='/audio';"/>
+            <input type="submit" value="영상 다운로드" onclick="javascript: form.action='/video';"/>
+        </form>
+    </body>
+</html>
