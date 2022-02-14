@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.get('/audio', async (req, res) => {
     var url = req.query.url;
     try { 
-        await ytdl(url, {filter:'audioonly', quality: 'highestaudio'}).pipe(fs.createWriteStream(__dirname + '/files/audio.mp3')).on('finish', () => {
+        await ytdl(url, {filter:'audioonly'}).pipe(fs.createWriteStream(__dirname + '/files/audio.mp3')).on('finish', () => {
             res.redirect('/static/audio.mp3');
         });
     }
