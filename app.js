@@ -14,12 +14,14 @@ app.get('/', (req, res) => {
 app.get('/audio', async (req, res) => {
     var filename = "audio.mp3";
     var url = req.query.url;
+    var quality = req.query.aq;
+
     if (!url.includes('youtube') && !url.includes('youtu.be')) {
         res.send("URL 오류");
         return;
     }
     try { 
-        await ytdl(url, {filter:'audioonly', quality: 'lowest'}).pipe(fs.createWriteStream(__dirname + '/files/' + filename)).on('finish', () => {  
+        await ytdl(url, {filter:'audioonly', quality: quality === 'high' ? 'highestaudio' : 'lowestaudio'}).pipe(fs.createWriteStream(__dirname + '/files/' + filename)).on('finish', () => {  
             res.redirect('/static/' + filename);
         });
     }
@@ -29,12 +31,14 @@ app.get('/audio', async (req, res) => {
 app.get('/video', async (req, res) => {
     var filename = "video.mp4";
     var url = req.query.url;
+    var quality = req.query.vq;
+
     if (!url.includes('youtube') && !url.includes('youtu.be')) {
         res.send("URL 오류");
         return;
     }
     try { 
-        await ytdl(url, {filter:'videoandaudio', quality: 'highestvideo'}).pipe(fs.createWriteStream(__dirname + '/files/' + filename)).on('finish', () => {
+        await ytdl(url, {filter:'videoandaudio', quality: quality === 'high' ? 'highestvideo' : 'lowestvideo'}).pipe(fs.createWriteStream(__dirname + '/files/' + filename)).on('finish', () => {
             res.redirect('/static/' + filename);
         });
     }

@@ -35,15 +35,41 @@
         </nav>
         
         <form method="get" name="info" id="ui">
+            <input type="hidden" name="aq" value="low" size ="40" />
+            <input type="hidden" name="vq" value="high" size ="40" />
             <input class="form-control" type="text" placeholder="URL 입력" name="url" autocomplete="off" style="margin: 30px; width: 400px; margin-bottom: 15px;">
-            <button type="submit" class="btn btn-primary" onclick="javascript: audio(); form.action = '/audio';" style="margin-left: 30px;">오디오</button>
-            <button type="submit" class="btn btn-primary" onclick="javascript: video(); form.action = '/audio';">비디오</button>
+            <h5 style="margin-left:30px;">오디오</h5>
+            <div>
+                <button type="submit" class="btn btn-primary" onclick="javascript: audio(); form.action = '/audio';" style="margin-left: 30px;">오디오 다운로드</button>
+                <span class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    오디오 품질 설정
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <li><button class="dropdown-item" type="button" onclick="javascript: acvalue('low');">낮음 (높은 호환성, AAC 코덱)</button></li>
+                      <li><button class="dropdown-item" type="button" onclick="javascript: acvalue('high');">높음 (우수한 음질, OPUS 코덱)</button></li>
+                    </ul>
+                </span>
+            </div>
+            <h5 style="margin-left:30px; margin-top: 10px;">비디오</h5>
+            <div style="margin-top: 10px;">
+                <button type="submit" class="btn btn-primary" onclick="javascript: video(); form.action = '/audio';" style="margin-left: 30px;">비디오 다운로드</button>
+                <span class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    비디오 품질 설정
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <li><button class="dropdown-item" type="button" onclick="javascript: vcvalue('low');">낮음 (높은 호환성)</button></li>
+                      <li><button class="dropdown-item" type="button" onclick="javascript: vcvalue('high');">높음 (우수한 음질)</button></li>
+                    </ul>
+                </span>
+            </div>
         </form>
 
         <div id="wait">
             <div class="d-flex align-items-center" style="margin: 30px;">
                 <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
-                <strong style="margin-left: 15px;">잠시만 기다려 주세요.. 잠시 후 다운로드가 시작됩니다.</strong>
+                <strong style="margin-left: 15px;">잠시만 기다려 주세요..</strong>
             </div>
         </div>
 
@@ -51,6 +77,18 @@
     </body>
 
     <script>
+        function acvalue(aq) {
+            var formInfo = document.forms['info'];
+
+            formInfo.aq.value = aq;
+        }
+
+        function vcvalue(vq) {
+            var formInfo = document.forms['info'];
+
+            formInfo.vq.value = vq;
+        }
+
         function audio() {
             var target = document.getElementById('ui'); 
             var target2 = document.getElementById('wait');
